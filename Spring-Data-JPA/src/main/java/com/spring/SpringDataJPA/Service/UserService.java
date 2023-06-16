@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import com.spring.SpringDataJPA.Model.User;
 
@@ -50,8 +51,8 @@ public class UserService {
               return repository.findByProfessionAndAge(profession,age);
     }
     
-    public List<User> getUserIgnoreCase(int age){
-        return repository.findByAgeIgnoreCase(age);
+    public List<User> getUserIgnoreCase(String profession){
+        return repository.findByProfessionIgnoreCase(profession);
     }
     
     //sort
@@ -67,6 +68,8 @@ public class UserService {
    public List<User> getUsersCustomQuery() {
         return repository.getUsersCustomQuery();
    }
+
+   public List<User> getUsersByAge(int age){return repository.getUsersByAge(age);}
     
     
 }

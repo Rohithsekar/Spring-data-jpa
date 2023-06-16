@@ -40,10 +40,11 @@ public class UserController {
     public List<User> getUsersByProfessionAndAge(@PathVariable String profession, @PathVariable int age){
         return  service.findByMultiCondition(profession, age);
     }
-    
+
+    //The URL looks like this: http://<host>:<port>/getUsersIgnoreCase?profession=<profession>
     @GetMapping("/getUsersIgnoreCase")
-    public List<User> getUsersByAge(@RequestParam("age") int age){
-        return service.getUserIgnoreCase(age);
+    public List<User> getUsersByProfessionIgnoreCase(@RequestParam("profession") String profession){
+        return service.getUserIgnoreCase(profession);
     }
     
     @GetMapping("/getSorted/{field}")
@@ -60,6 +61,9 @@ public class UserController {
     public List<User> getUsersByCustomQuery(){
         return service.getUsersCustomQuery();
     }
+
+    @GetMapping("/getUsersByAge")
+    public List<User> getUsersByAge(@RequestParam("age")  int age){ return service.getUsersByAge(age);}
     
     
 }
