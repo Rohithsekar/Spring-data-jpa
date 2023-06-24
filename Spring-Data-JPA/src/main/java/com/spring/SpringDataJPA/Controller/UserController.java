@@ -21,6 +21,9 @@ public class UserController {
     public List<User> getAllUsers(){
         return service.getUsers();
     }
+
+    @GetMapping("/getById/{id}")
+    public User getById(@PathVariable int id){ return service.getUserById(id);}
     @GetMapping("/getByProfession/{profession}")
     public List<User> getByProfession(@PathVariable String profession){
         return service.getUserByProfession(profession);

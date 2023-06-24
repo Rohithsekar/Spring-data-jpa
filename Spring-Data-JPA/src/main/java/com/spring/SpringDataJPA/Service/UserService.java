@@ -1,17 +1,17 @@
 package com.spring.SpringDataJPA.Service;
 
 import com.spring.SpringDataJPA.Repository.UserRepository;
+import com.spring.SpringDataJPA.exception.RequestEntityAbsentException;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import com.spring.SpringDataJPA.Model.User;
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class UserService {
@@ -34,7 +34,12 @@ public class UserService {
     public List<User> getUsers(){
          return repository.findAll();
     }
-    
+
+    public User getUserById(int id) {
+        return  repository.findById(id).orElseThrow(() -> new RequestEntityAbsentException("No record exists with id: " + id)
+        );
+
+    }
     public List<User> getUserByProfession(String profession){
         return repository.findByProfession(profession);
     }
