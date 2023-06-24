@@ -67,6 +67,20 @@ public class UserController {
 
     @GetMapping("/getUsersByAge")
     public List<User> getUsersByAge(@RequestParam("age")  int age){ return service.getUsersByAge(age);}
+
+    @PutMapping("/update")
+    public User updateUser(@RequestBody User user){
+        return service.updateUser(user);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public void deleteUser(@PathVariable int id){
+        service.deleteUser(id);
+    }
+
+
+
+
     
     
 }

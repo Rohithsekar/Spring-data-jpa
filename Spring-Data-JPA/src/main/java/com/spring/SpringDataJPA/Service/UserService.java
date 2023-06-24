@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.spring.SpringDataJPA.Model.User;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -75,8 +76,27 @@ public class UserService {
    }
 
    public List<User> getUsersByAge(int age){return repository.getUsersByAge(age);}
-    
-    
+
+    public User updateUser(User user){
+        User existingUser = repository.findById(user.getId()).orElse(null);
+        existingUser.setName(user.getName());
+        existingUser.setAge(user.getAge());
+        existingUser.setProfession(user.getProfession());
+        return repository.save(existingUser);
+
+    }
+
+    public void deleteUser(int id) {
+        repository.deleteById(id);
+        Optional<User> deletedUser = repository.findById(id);
+        if (deletedUser.isPresent()) {
+            throw new RequestEntityAbsentException("No such id exists");
+        }
+    }
+
+
+
+
 }
 
 
